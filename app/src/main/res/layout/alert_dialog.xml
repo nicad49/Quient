@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="24dp">
+
+    <!--<TextView-->
+        <!--android:id="@+id/actionAlertTitle"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="24dp"-->
+        <!--android:layout_marginRight="24dp"-->
+        <!--android:layout_marginTop="24dp"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:textSize="16dp"-->
+        <!--android:text="@string/actionDialogTitle"-->
+        <!--/>-->
+
+    <TextView
+        android:id="@+id/actionAlert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:text="@string/actionDialogMessage"
+        />
+
+    <RadioGroup
+        android:id="@+id/alertRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/actionAlert"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp">
+
+        <RadioButton
+            android:id="@+id/vibrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/Vibrate"
+            />
+
+        <RadioButton
+            android:id="@+id/silent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Silent"
+            />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/alertRadioGroup"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/ok"
+        android:textColor="@color/colorAccent"
+        />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/alertRadioGroup"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/cancel"
+        android:textColor="@color/colorAccent"
+        />
+
+
+</RelativeLayout>

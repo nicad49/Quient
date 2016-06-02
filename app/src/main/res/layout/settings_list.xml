@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/statusText"
+        android:textSize="16dp"
+        android:textColor="@color/colorText"
+        android:id="@+id/statusSwitch"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false"
+        />
+
+    <View
+        android:id="@+id/divide1"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/statusSwitch"
+        android:background="#1f000000"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/action"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="vertical"
+        android:layout_below="@id/divide1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/actionTitle"
+            android:textColor="@color/colorText"
+            android:textSize="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/action"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/actionValue"
+            android:textColor="@color/colorTextLight"
+            android:layout_marginBottom="16dp"
+            android:text="@string/Vibrate"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divide2"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/action"
+        android:background="#1f000000"/>
+
+
+</RelativeLayout>
