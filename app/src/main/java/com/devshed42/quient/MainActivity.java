@@ -1,6 +1,8 @@
 package com.devshed42.quient;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +20,8 @@ import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
+    private String LOG_TAG = MainActivity.class.getSimpleName();
+
     LinearLayout actionLinearLayout;
     TextView actionValue;
     Switch statusSwitch;
@@ -30,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
     final String PREF_STATUS = "STATUS";
     final String PREF_ACTION = "ACTION";
+
+    final int VIBRATE = 1;
+    final int SILENT = 0;
 
 
     @Override
@@ -54,30 +61,46 @@ public class MainActivity extends AppCompatActivity {
 
         statusSwitch.setChecked(preferences.getBoolean(PREF_STATUS, false));
 
+        final Intent intent = new Intent(getApplicationContext(), QuientService.class);
+
         int actionId = preferences.getInt(PREF_ACTION,1);
 
         switch (actionId) {
+            case 0:
+                actionValue.setText(R.string.Silent);
+                vibrateBtn.setChecked(false);
+                silentBtn.setChecked(true);
+                break;
             case 1:
                 actionValue.setText(R.string.Vibrate);
                 vibrateBtn.setChecked(true);
                 silentBtn.setChecked(false);
                 break;
-            case 2:
-                actionValue.setText(R.string.Silent);
-                vibrateBtn.setChecked(false);
-                silentBtn.setChecked(true);
-                break;
             default:
                 break;
+        }
+
+        if (statusSwitch.isChecked()) {
+            getApplicationContext().startService(intent);
         }
 
 
         statusSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.d("MainActivity", "Status: " + buttonView.isChecked());
+                Log.d(LOG_TAG, "Status: " + buttonView.isChecked());
                 editor.putBoolean(PREF_STATUS, buttonView.isChecked());
                 editor.apply();
+
+                if (buttonView.isChecked()) {
+                    // Start service
+                    Log.d(LOG_TAG, "Starting Service");
+
+                    getApplicationContext().startService(intent);
+                } else {
+                    Log.d(LOG_TAG, "Stopping Service");
+                    getApplicationContext().stopService(intent);
+                }
 
             }
         });
@@ -86,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         actionLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("MainActivity", "Button Clicked");
+                Log.d(LOG_TAG, "Button Clicked");
 
                 Button dialogBtnOk = (Button) dialog.findViewById(R.id.btnOk);
                 Button dialogBtnCancel = (Button) dialog.findViewById(R.id.btnCancel);
@@ -94,21 +117,21 @@ public class MainActivity extends AppCompatActivity {
                 dialogBtnOk.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.d("MainActivity", "Checked radio: " + radioGroup.getCheckedRadioButtonId());
-                        Log.d("MainActivity", "Vibrate ID: " + R.id.vibrate);
-                        Log.d("MainActivity", "Silent ID: " + R.id.silent);
+                        Log.d(LOG_TAG, "Checked radio: " + radioGroup.getCheckedRadioButtonId());
+                        Log.d(LOG_TAG, "Vibrate ID: " + R.id.vibrate);
+                        Log.d(LOG_TAG, "Silent ID: " + R.id.silent);
 
                         switch (radioGroup.getCheckedRadioButtonId()) {
-                            case R.id.vibrate:
-                                Log.d("MainActivity", "Adding pref_action: 1");
-                                actionValue.setText(R.string.Vibrate);
-                                editor.putInt(PREF_ACTION,1);
+                            case R.id.silent:
+                                Log.d(LOG_TAG, "Adding pref_action: 0");
+                                actionValue.setText(R.string.Silent);
+                                editor.putInt(PREF_ACTION,SILENT);
                                 editor.apply();
                                 break;
-                            case R.id.silent:
-                                Log.d("MainActivity", "Adding pref_action: 2");
-                                actionValue.setText(R.string.Silent);
-                                editor.putInt(PREF_ACTION,2);
+                            case R.id.vibrate:
+                                Log.d(LOG_TAG, "Adding pref_action: 1");
+                                actionValue.setText(R.string.Vibrate);
+                                editor.putInt(PREF_ACTION,VIBRATE);
                                 editor.apply();
                                 break;
                             default:
@@ -125,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 dialog.show();
-                Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT).show();
             }
         });
     }
