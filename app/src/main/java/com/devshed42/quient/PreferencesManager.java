@@ -22,7 +22,7 @@ public class PreferencesManager {
     public static final int VIBRATE = 1;
     public static final int SILENT = 0;
     public static final int PREF_SAVED_MODE_NO_VALUE = 2;
-    
+
 
     public static final void saveState(Context context, boolean enabled) {
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)

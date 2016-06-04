@@ -30,8 +30,6 @@ public class UserPresentBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // TODO: This method is called when the BroadcastReceiver is receiving
-        // an Intent broadcast.
 
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
         editor = preferences.edit();
@@ -42,7 +40,7 @@ public class UserPresentBroadcastReceiver extends BroadcastReceiver {
 
             int currentRingerMode = audio.getRingerMode();
             int ringerMode = preferences.getInt(PREF_ACTION,VIBRATE);
-            editor.putInt(PREF_ORIGINAL_STATE, audio.getRingerMode());
+            editor.putInt(PREF_ORIGINAL_STATE, audio.getRingerMode()).apply();
             Toast.makeText(context, "From: " + currentRingerMode + " to: " + ringerMode, Toast.LENGTH_LONG).show();
             Log.d(LOG_TAG, "Current Ringer Mode: " + currentRingerMode);
             Log.d(LOG_TAG, "User is present.  Switch phone to: " + ringerMode);
