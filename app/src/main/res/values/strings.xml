@@ -4,10 +4,11 @@
     <string name="action">Action</string>
     <string name="actionDialogMessage">Select an action</string>
     <string name="actionDialogTitle">Action</string>
-    <string name="action1">Vibrate</string>
-    <string name="action2">Silent</string>
+    <!--<string name="action1">Vibrate</string>-->
+    <!--<string name="action2">Silent</string>-->
     <string name="ok">OK</string>
     <string name="cancel">CANCEL</string>
     <string name="Vibrate">Vibrate</string>
     <string name="Silent">Silent</string>
+    <string name="Normal">Normal</string>
 </resources>

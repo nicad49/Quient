@@ -1,8 +1,6 @@
 package com.devshed42.quient;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 /**
  * Created by doug on 2016-06-02.
@@ -20,8 +18,6 @@ public class PreferencesManager {
     public static final int PREF_ORIGINAL_STATE_DEFAULT = 2;
 
     public static final int VIBRATE = 1;
-    public static final int SILENT = 0;
-    public static final int PREF_SAVED_MODE_NO_VALUE = 2;
 
 
     public static final void saveState(Context context, boolean enabled) {
