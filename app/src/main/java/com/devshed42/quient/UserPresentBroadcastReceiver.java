@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import static com.devshed42.quient.PreferencesManager.*;
+
 public class UserPresentBroadcastReceiver extends BroadcastReceiver {
 
     private String LOG_TAG = UserPresentBroadcastReceiver.class.getSimpleName();
@@ -13,15 +15,12 @@ public class UserPresentBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-
         if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
-
 
             int currentRingerMode = QuientAudio.getQuientRingerMode(context);
 
-
-            int ringerMode = PreferencesManager.getSavedAction(context);
-            PreferencesManager.saveOriginalState(context, currentRingerMode);
+            int ringerMode = getSavedAction(context);
+            saveOriginalState(context, currentRingerMode);
 
             Toast.makeText(context, "From: " +
                     QuientAudio.resolveQuientRingerMode(context, currentRingerMode) + " to: " +
@@ -34,7 +33,7 @@ public class UserPresentBroadcastReceiver extends BroadcastReceiver {
         }
         else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
 
-            int originalRingerMode = PreferencesManager.getOriginalState(context);
+            int originalRingerMode = getOriginalState(context);
             Log.d(LOG_TAG, "Screen off.  Switch phone to normal: " + originalRingerMode);
             QuientAudio.setQuientRingerMode(context, originalRingerMode);
         }

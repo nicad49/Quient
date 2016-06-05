@@ -14,6 +14,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.util.Log;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private String LOG_TAG = MainActivity.class.getSimpleName();
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                                 Log.d(LOG_TAG, "Adding pref_action: 0");
                                 actionValue.setText(R.string.Silent);
                                 PreferencesManager.saveAction(MainActivity.this, SILENT);
-                                if (QuientService.isQuientRunning() == true) {
+                                if (QuientService.isQuientRunning()) {
                                     Log.d(LOG_TAG, "Quient is Running; Restarting Service");
                                     getApplicationContext().stopService(intent);
                                     getApplicationContext().startService(intent);
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                                 Log.d(LOG_TAG, "Adding pref_action: 1");
                                 actionValue.setText(R.string.Vibrate);
                                 PreferencesManager.saveAction(MainActivity.this, VIBRATE);
-                                if (QuientService.isQuientRunning() == true) {
+                                if (QuientService.isQuientRunning()) {
                                     Log.d(LOG_TAG, "Quient is running; Restarting Service");
                                     getApplicationContext().stopService(intent);
                                     getApplicationContext().startService(intent);

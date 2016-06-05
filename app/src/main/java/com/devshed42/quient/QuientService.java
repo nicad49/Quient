@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+
 public class QuientService extends Service {
 
     private static QuientService instance = null;
@@ -45,6 +46,7 @@ public class QuientService extends Service {
         QuientAudio.setQuientRingerMode(this, originalRingerMode);
         Toast.makeText(QuientService.this, "Service is stopped", Toast.LENGTH_SHORT).show();
         unregisterReceiver(userPresentReceiver);
+        instance = null;
     }
 
     @Override
